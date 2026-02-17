@@ -5,7 +5,7 @@ import {
   Smartphone,
   Box,
   FileImage,
-  MessageCircle,
+
   Phone,
   Brain,
 } from 'lucide-react';

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { MapPin, Phone, Mail, Instagram, Twitter, Linkedin, Facebook, ArrowUp } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowUp } from 'lucide-react';
 import nexlabLogo from '../assets/nexlab.png';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -102,12 +102,12 @@ const Footer = () => {
     ],
   };
 
-  const socialLinks = [
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Facebook, href: '#', label: 'Facebook' },
-  ];
+  // const socialLinks = [
+  //   { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  //   { icon: Twitter, href: '#', label: 'Twitter' },
+  //   { icon: Instagram, href: '#', label: 'Instagram' },
+  //   { icon: Facebook, href: '#', label: 'Facebook' },
+  // ];
 
   return (
     <footer ref={footerRef} className="bg-dark-deeper relative">
