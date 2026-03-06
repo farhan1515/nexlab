@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Allow AI crawlers explicitly (critical for LLM visibility)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://www.nexlab.solutions/sitemap.xml

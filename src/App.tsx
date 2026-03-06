@@ -8,6 +8,7 @@ import ProcessSection from './sections/ProcessSection';
 import WhyChooseUsSection from './sections/WhyChooseUsSection';
 import CTASection from './sections/CTASection';
 import Footer from './components/Footer';
+import SchemaMarkup from './components/SchemaMarkup';
 import './App.css';
 
 import { Toaster } from './components/ui/sonner';
@@ -27,6 +28,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-dark text-white overflow-x-hidden">
+      {/* SEO Schema Markup - Invisible JSON-LD injected into <head> for Google & LLMs */}
+      <SchemaMarkup />
+
       <Navigation />
       <main>
         <HeroSection />

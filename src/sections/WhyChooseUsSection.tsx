@@ -72,65 +72,65 @@ const WhyChooseUsSection = () => {
                 <div className="motion-cards-container w-full max-w-2xl mx-auto">
                     <MotionCards interval={2500}>
                         {/* 1. Direct Access */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <Terminal className="w-8 h-8 text-primary shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <Terminal className="w-6 h-6 sm:w-8 sm:h-8 text-primary shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">Direct Engineer Access</h4>
-                                <p className="text-sm opacity-90">Talk to the person writing your code, not a project manager.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">Direct Engineer Access</h4>
+                                <p className="text-xs sm:text-sm opacity-90">Talk to the person writing your code, not a project manager.</p>
                             </div>
                         </MotionCardContent>
 
                         {/* 2. Revenue Focused */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <Banknote className="w-8 h-8 text-green-500 shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <Banknote className="w-6 h-6 sm:w-8 sm:h-8 text-green-500 shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">Revenue Focused</h4>
-                                <p className="text-sm opacity-90">If it doesn't make money or save time, we don't build it.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">Revenue Focused</h4>
+                                <p className="text-xs sm:text-sm opacity-90">If it doesn't make money or save time, we don't build it.</p>
                             </div>
                         </MotionCardContent>
 
                         {/* 3. We Own the Outcome */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <CheckCircle2 className="w-8 h-8 text-blue-500 shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <CheckCircle2 className="w-6 h-6 sm:w-8 sm:h-8 text-blue-500 shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">We Own the Outcome</h4>
-                                <p className="text-sm opacity-90">We don't just ship and leave. We monitor performance 24/7 post-launch.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">We Own the Outcome</h4>
+                                <p className="text-xs sm:text-sm opacity-90">We don't just ship and leave. We monitor performance 24/7 post-launch.</p>
                             </div>
                         </MotionCardContent>
 
                         {/* 4. Full Code Ownership */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <Lock className="w-8 h-8 text-amber-500 shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-amber-500 shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">Full Code Ownership</h4>
-                                <p className="text-sm opacity-90">You own every line of code. No vendor lock-in, ever.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">Full Code Ownership</h4>
+                                <p className="text-xs sm:text-sm opacity-90">You own every line of code. No vendor lock-in, ever.</p>
                             </div>
                         </MotionCardContent>
 
                         {/* 5. Scalable Architecture */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <Cpu className="w-8 h-8 text-purple-500 shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <Cpu className="w-6 h-6 sm:w-8 sm:h-8 text-purple-500 shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">Scalable Architecture</h4>
-                                <p className="text-sm opacity-90">Robust systems designed to grow with your business, handling increasing traffic effortlessly.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">Scalable Architecture</h4>
+                                <p className="text-xs sm:text-sm opacity-90">Robust systems designed to grow with your business, handling increasing traffic effortlessly.</p>
                             </div>
                         </MotionCardContent>
 
                         {/* 6. Future Proof */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <Rocket className="w-8 h-8 text-pink-500 shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <Rocket className="w-6 h-6 sm:w-8 sm:h-8 text-pink-500 shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">Future-Proof Tech</h4>
-                                <p className="text-sm opacity-90">Modern stacks that won't become legacy code next year.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">Future-Proof Tech</h4>
+                                <p className="text-xs sm:text-sm opacity-90">Modern stacks that won't become legacy code next year.</p>
                             </div>
                         </MotionCardContent>
 
                         {/* 7. Data Driven */}
-                        <MotionCardContent className="flex gap-4 p-6 items-center">
-                            <BarChart3 className="w-8 h-8 text-cyan-500 shrink-0" />
+                        <MotionCardContent className="flex gap-3 sm:gap-4 p-4 sm:p-6 items-center">
+                            <BarChart3 className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-500 shrink-0" />
                             <div>
-                                <h4 className="text-lg font-bold mb-1">Data-Driven Design</h4>
-                                <p className="text-sm opacity-90">We design based on real user data, not just pretty aesthetics.</p>
+                                <h4 className="text-base sm:text-lg font-bold mb-1">Data-Driven Design</h4>
+                                <p className="text-xs sm:text-sm opacity-90">We design based on real user data, not just pretty aesthetics.</p>
                             </div>
                         </MotionCardContent>
                     </MotionCards>

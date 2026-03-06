@@ -51,7 +51,7 @@ export default function MotionCards({
   }, [nextId, interval]);
 
   return (
-    <div className='flex items-center justify-center relative px-2 h-[400px] sm:h-[480px] md:h-[600px] overflow-hidden w-full'>
+    <div className='flex items-center justify-center relative px-2 h-[460px] sm:h-[480px] md:h-[600px] overflow-hidden w-full'>
       <div className='flex flex-col space-y-2 relative z-10 items-center w-full justify-center h-full max-w-md mx-auto'>
         <AnimatePresence initial={false} mode='popLayout'>
           {cards.map((cardId, i) => {
@@ -71,7 +71,7 @@ export default function MotionCards({
                   ease: 'easeInOut',
                   layout: { duration: 0.8 },
                 }}
-                className={`flex items-center rounded-2xl px-3 py-4 relative overflow-hidden ${slotBase[i]}`}
+                className={`flex items-center rounded-2xl px-2 sm:px-3 py-2 sm:py-4 relative overflow-hidden ${slotBase[i]}`}
                 style={{
                   backdropFilter: 'blur(10px)',
                 }}

@@ -1,0 +1,40 @@
+# NexLab Solutions
+
+NexLab Solutions is a full-service digital agency headquartered in Windsor, Ontario, Canada.
+
+## What We Do
+We help businesses across Canada and the USA grow through technology:
+
+- **Web Development**: Custom websites, web applications, and e-commerce platforms built with React, Next.js, and modern frameworks.
+- **Mobile App Development**: iOS and Android apps built with React Native and Flutter.
+- **AI Solutions**: WhatsApp automation, AI calling agents, AI chatbots, and business process automation.
+- **WhatsApp Automation**: AI-powered WhatsApp Business bots that handle customer service, bookings, and sales 24/7.
+- **AI Calling**: Automated voice AI agents that make and receive calls for appointment scheduling, lead qualification, and customer follow-up.
+- **Digital Marketing**: Social media management, SEO, email marketing, and paid advertising.
+- **Brand Design**: Logo design, brand identity, and marketing collateral.
+
+## Who We Serve
+- Small and medium-sized businesses in Windsor, Ontario
+- Businesses across Canada and the United States
+- Startups looking to establish their digital presence
+- Established companies looking to integrate AI into their operations
+
+## Location
+Windsor, Ontario, Canada
+Serving: Windsor-Essex, Ontario, Canada, USA
+
+## Contact
+Website: https://www.nexlab.solutions
+Email: hello@nexlab.solutions
+
+## Why NexLab
+NexLab Solutions combines enterprise-level technical expertise with the personal attention of a local agency. We are one of the few agencies in Windsor, Ontario offering both traditional digital services and cutting-edge AI solutions like WhatsApp automation and AI calling.
+
+## Specializations
+- Custom Web Development (React, Next.js, TypeScript)
+- Mobile App Development (iOS, Android, React Native, Flutter)
+- AI Automation (WhatsApp, Voice AI, Chatbots)
+- Digital Marketing & SEO
+- Brand Design & Identity
+- E-commerce Development
+- Business Process Automation
