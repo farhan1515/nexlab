@@ -9,30 +9,9 @@ export default function SchemaMarkup() {
         "url": "https://www.nexlab.solutions",
         "logo": "https://www.nexlab.solutions/logo.png",
         "image": "https://www.nexlab.solutions/og-image.png",
-        "description": "NexLab Solutions is a full-service digital agency in Windsor, Ontario, Canada specializing in web development, mobile app development, AI automation solutions including WhatsApp automation and AI calling, digital marketing, and brand design for businesses across Canada and the USA.",
+        "description": "NexLab Solutions is a full-service digital agency specializing in website design, mobile app development, and AI automation solutions including WhatsApp automation and AI receptionists for businesses.",
         "foundingDate": "2023",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Windsor",
-            "addressRegion": "Ontario",
-            "addressCountry": "CA",
-            "postalCode": "N9A"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 42.3149,
-            "longitude": -83.0364
-        },
         "areaServed": [
-            {
-                "@type": "City",
-                "name": "Windsor",
-                "containedIn": "Ontario, Canada"
-            },
-            {
-                "@type": "State",
-                "name": "Ontario"
-            },
             {
                 "@type": "Country",
                 "name": "Canada"
@@ -50,8 +29,8 @@ export default function SchemaMarkup() {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Web Development",
-                        "description": "Custom website design and development for businesses in Windsor, Ontario and across Canada. We build fast, SEO-optimized, responsive websites using React, Next.js, and modern web technologies."
+                        "name": "Website Design",
+                        "description": "Fast, stunning websites that show up on Google and turn visitors into paying customers. No templates — designed specifically for your business."
                     }
                 },
                 {
@@ -59,15 +38,15 @@ export default function SchemaMarkup() {
                     "itemOffered": {
                         "@type": "Service",
                         "name": "Mobile App Development",
-                        "description": "iOS and Android mobile application development for Canadian and US businesses. Native and cross-platform apps built with React Native and Flutter."
+                        "description": "Sleek, high-performance mobile apps that keep your customers coming back. Available on iPhone and Android for varying business use-cases."
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "AI Solutions",
-                        "description": "Artificial intelligence solutions including WhatsApp automation, AI calling agents, AI chatbots, and business process automation for companies in Windsor, Ontario and across North America."
+                        "name": "Custom AI Solutions",
+                        "description": "Custom tools that handle invoicing, scheduling, inventory, and customer follow-ups."
                     }
                 },
                 {
@@ -75,31 +54,23 @@ export default function SchemaMarkup() {
                     "itemOffered": {
                         "@type": "Service",
                         "name": "WhatsApp Automation",
-                        "description": "Custom WhatsApp Business automation solutions that handle customer inquiries, bookings, and sales 24/7 using AI-powered chatbots for businesses in Canada and the USA."
+                        "description": "Smart auto-reply systems that handle inquiries, take bookings, and follow up with leads 24/7."
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "AI Calling",
-                        "description": "AI-powered voice calling agents that can handle inbound and outbound calls, schedule appointments, and qualify leads automatically for businesses across Canada."
+                        "name": "AI Receptionist",
+                        "description": "Virtual receptionists that answer calls, book appointments, and capture leads seamlessly and realistically 24/7."
                     }
                 },
                 {
                     "@type": "Offer",
                     "itemOffered": {
                         "@type": "Service",
-                        "name": "Digital Marketing",
-                        "description": "Social media marketing, SEO, email campaigns, and paid advertising for businesses in Windsor, Ontario and across Canada."
-                    }
-                },
-                {
-                    "@type": "Offer",
-                    "itemOffered": {
-                        "@type": "Service",
-                        "name": "Brand Design",
-                        "description": "Logo design, brand identity, visual design, and marketing collateral creation for businesses in Windsor and across Canada."
+                        "name": "Google & AI Search SEO",
+                        "description": "Optimizing digital presence so your business is the top recommendation on both traditional search engines and modern AI platforms."
                     }
                 }
             ]
@@ -118,104 +89,56 @@ export default function SchemaMarkup() {
         ]
     };
 
-    const localBusinessSchema = {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "NexLab Solutions",
-        "image": "https://www.nexlab.solutions/og-image.png",
-        "@id": "https://www.nexlab.solutions/#localbusiness",
-        "url": "https://www.nexlab.solutions",
-        "telephone": "+1-519-xxx-xxxx",
-        "priceRange": "$$",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Windsor",
-            "addressRegion": "ON",
-            "addressCountry": "CA"
-        },
-        "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 42.3149,
-            "longitude": -83.0364
-        },
-        "openingHoursSpecification": [
-            {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
-                "closes": "18:00"
-            }
-        ],
-        "servesCuisine": null,
-        "hasMap": "https://maps.google.com/?q=Windsor+Ontario+Canada"
-    };
-
     const faqSchema = {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
             {
                 "@type": "Question",
-                "name": "What web development services does NexLab Solutions offer in Windsor, Ontario?",
+                "name": "How can AI actually get me more leads and revenue?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "NexLab Solutions offers custom website design and development, e-commerce solutions, responsive web applications, CMS development, and SEO-optimized websites for businesses in Windsor, Ontario and across Canada. We use modern technologies including React, Next.js, and Node.js."
+                    "text": "AI doesn't sleep. While you're closed or busy, our AI systems instantly reply to inquiries across WhatsApp, SMS, or website chat. By engaging leads within seconds instead of hours, answering their questions, and booking them directly into your calendar, we capture revenue that would have otherwise gone to your competitors."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Does NexLab Solutions build mobile apps in Canada?",
+                "name": "Will an AI receptionist sound like a robotic machine?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, NexLab Solutions develops iOS and Android mobile applications for businesses across Canada and the USA. We specialize in both native app development and cross-platform solutions using React Native and Flutter."
+                    "text": "No. Our AI voice agents use cutting-edge natural language processing. They sound incredibly human, handle interruptions gracefully, understand accents, and can answer complex questions about your business, pricing, and services. Your customers won't even realize they're talking to AI."
                 }
             },
             {
                 "@type": "Question",
-                "name": "What AI solutions does NexLab Solutions provide?",
+                "name": "What is Google & AI Search SEO?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "NexLab Solutions provides comprehensive AI solutions including WhatsApp automation (AI chatbots for WhatsApp Business), AI calling agents for automated inbound and outbound calls, AI-powered customer service chatbots, and custom business process automation using artificial intelligence."
+                    "text": "Traditional SEO just focuses on Google Search. But today, customers ask ChatGPT, Gemini, and Siri for recommendations (like 'find the best lawyer near me'). We optimize your digital presence so your business is the top recommendation on both traditional search engines AND modern AI platforms."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Can NexLab Solutions automate my business's WhatsApp communications?",
+                "name": "Can you build an app or a website that integrates these AI tools?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. NexLab Solutions builds custom WhatsApp Business automation systems that use AI to handle customer inquiries, send automated responses, manage bookings, process orders, and qualify leads 24/7 — even while you sleep. We serve businesses across Windsor, Ontario and all of Canada."
+                    "text": "Absolutely. We build high-converting websites and scalable mobile apps with these AI automations built right in. Your website becomes a 24/7 sales machine instead of just a digital brochure."
                 }
             },
             {
                 "@type": "Question",
-                "name": "What is AI calling and does NexLab Solutions offer it in Canada?",
+                "name": "How fast will I see a return on my investment?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "AI calling refers to AI-powered voice agents that can make and receive phone calls on behalf of your business. NexLab Solutions builds AI calling systems that can handle appointment scheduling, lead qualification, customer follow-ups, and inbound support calls for Canadian businesses — completely automated."
+                    "text": "Most businesses see an immediate ROI the day the automation goes live. If our AI receptionist saves you the cost of hiring a full-time staff member, or our WhatsApp bot books just 3 extra high-ticket clients a month who would have otherwise been ignored, the system pays for itself almost instantly."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Which areas does NexLab Solutions serve?",
+                "name": "I already have a website. Can you just add the AI to it?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "NexLab Solutions is headquartered in Windsor, Ontario, Canada and serves clients across Windsor-Essex, Ontario, all of Canada, and the United States. We work remotely with clients worldwide and have a strong focus on supporting local Windsor and Canadian businesses."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How much does it cost to build a website in Windsor, Ontario?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Website development costs vary based on complexity and requirements. NexLab Solutions offers flexible packages starting from simple business websites to full e-commerce platforms and custom web applications. Contact us for a free consultation and custom quote tailored to your business needs."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Why should I choose a local Windsor agency like NexLab Solutions?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Choosing NexLab Solutions means working with a team that understands the Windsor and Canadian business landscape, operates in your time zone, and is invested in your local community's success. We combine enterprise-level technical expertise with the personal attention you'd expect from a local agency partner."
+                    "text": "Yes. Whether we build your site from scratch or integrate with your existing setup, our AI voice agents, WhatsApp automation, and smart scheduling tools can easily plug into your current workflow to turbocharge your operations."
                 }
             }
         ]
@@ -240,7 +163,6 @@ export default function SchemaMarkup() {
         // Inject all schema markup scripts
         const schemas = [
             organizationSchema,
-            localBusinessSchema,
             faqSchema,
             websiteSchema
         ];

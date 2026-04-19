@@ -3,11 +3,10 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
   Smartphone,
-  Box,
-  FileImage,
-
+  Globe,
   Phone,
   Brain,
+  Search,
 } from 'lucide-react';
 import { ServiceVideoPlayer } from '../components/ServiceVideoPlayer';
 
@@ -16,6 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface Service {
   icon: React.ElementType;
   title: string;
+  videoKey: string; // Maps to ServiceVideoPlayer's videoConfig
   description: string;
   tagline: string;
   gradient: string;
@@ -31,63 +31,69 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const services: Service[] = [
   {
-    icon: Smartphone,
-    title: 'App Development',
+    icon: WhatsAppIcon,
+    title: 'Never Miss a Customer Again',
+    videoKey: 'WhatsApp Automation',
     description:
-      'We build sleek, high-performance mobile apps — for all devices — that your users will actually love using. From concept to App Store.',
-    tagline: 'Fast Delivery · Scalable · Beautiful UI · App Store Ready',
-    gradient: 'from-[#00D4AA] to-[#00B894]',
-    accentColor: '#00D4AA',
+      'How many customers did you lose because nobody answered? Our smart auto-reply system handles inquiries, takes bookings, and follows up with leads — 24/7, even while you sleep.',
+    tagline: 'Auto-Reply · Booking System · Follow-Ups · Works 24/7',
+    gradient: 'from-[#25D366] to-[#128C7E]',
+    accentColor: '#25D366',
     number: '01',
   },
   {
-    icon: Box,
-    title: '3D Web Development',
+    icon: Phone,
+    title: 'AI Receptionist — Save $3,000/Month',
+    videoKey: 'AI Voice Calling Agent',
     description:
-      'Interactive 3D experiences that make your website unforgettable. Immersive visuals and interactive elements that bring your brand to life.',
-    tagline: 'Interactive · Immersive · Stunning Visuals · Engaging',
-    gradient: 'from-[#6C63FF] to-[#3B82F6]',
-    accentColor: '#6C63FF',
+      'A virtual receptionist that answers every call, books appointments, and never calls in sick. Sounds just like a real person. Works nights, weekends, and holidays.',
+    tagline: 'Answers Calls · Books Appointments · Captures Leads · Never Sleeps',
+    gradient: 'from-[#FFB800] to-[#FF8C00]',
+    accentColor: '#FFB800',
     number: '02',
   },
   {
-    icon: FileImage,
-    title: 'Flyer & Brand Design',
+    icon: Brain,
+    title: 'Smart Automation for Your Business',
+    videoKey: 'Custom AI Solutions',
     description:
-      'Eye-catching marketing materials that cut through the noise. From social media creatives to printed flyers — visuals that convert.',
-    tagline: 'Social Media · Print · Branding · Marketing',
-    gradient: 'from-[#FF6B6B] to-[#EE5A24]',
-    accentColor: '#FF6B6B',
+      'Spending hours on repetitive tasks? We build custom tools that handle invoicing, scheduling, inventory, customer follow-ups — whatever slows you down. More time, less hassle.',
+    tagline: 'Save Time · Cut Costs · Reduce Errors · Grow Faster',
+    gradient: 'from-[#E040FB] to-[#7C4DFF]',
+    accentColor: '#E040FB',
     number: '03',
   },
   {
-    icon: WhatsAppIcon,
-    title: 'WhatsApp Automation',
+    icon: Search,
+    title: 'Get Found on Google & AI Search',
+    videoKey: 'App Development',
     description:
-      'Smart chatbots that handle customer queries 24/7. Automate orders, support, and engagement — while you focus on growing your business.',
-    tagline: 'Auto-Reply · Order Taking · 24/7 Support · Smart Replies',
-    gradient: 'from-[#25D366] to-[#128C7E]',
-    accentColor: '#25D366',
+      'When someone searches for what you sell — on Google, ChatGPT, Gemini, or Siri — do they find YOU or your competitor? We put your business at the top of every search, traditional and AI-powered.',
+    tagline: 'Google Maps · Google Search · ChatGPT · Gemini · Siri',
+    gradient: 'from-[#4285F4] to-[#34A853]',
+    accentColor: '#4285F4',
     number: '04',
   },
   {
-    icon: Phone,
-    title: 'AI Voice Calling Agent',
+    icon: Globe,
+    title: 'Websites That Get You Customers',
+    videoKey: '3D Web Development',
     description:
-      'An AI agent that picks up your calls, answers questions, books appointments, and qualifies leads — just like a real person, but never sleeps.',
-    tagline: 'Auto-Answering · Booking · 24/7 Active · Lead Capture',
-    gradient: 'from-[#FFB800] to-[#FF8C00]',
-    accentColor: '#FFB800',
+      'Your website is your 24/7 salesperson. We build fast, stunning websites that show up on Google and turn visitors into paying customers. No templates — designed specifically for YOUR business.',
+    tagline: 'Mobile-Ready · SEO Built-In · Ready in 2 Weeks · You Own Everything',
+    gradient: 'from-[#6C63FF] to-[#3B82F6]',
+    accentColor: '#6C63FF',
     number: '05',
   },
   {
-    icon: Brain,
-    title: 'Custom AI Solutions',
+    icon: Smartphone,
+    title: 'Mobile Apps Your Customers Will Love',
+    videoKey: 'App Development',
     description:
-      'Bespoke AI implementations tailored to your unique business challenges. From data analysis to intelligent automation — we build what you need.',
-    tagline: 'Save Time · Cut Costs · Automate Tasks · Grow Faster',
-    gradient: 'from-[#E040FB] to-[#7C4DFF]',
-    accentColor: '#E040FB',
+      'From ordering apps for restaurants to booking apps for salons — we build sleek, high-performance mobile apps that keep your customers coming back. Available on iPhone and Android.',
+    tagline: 'iOS & Android · Ordering · Booking · Push Notifications',
+    gradient: 'from-[#00D4AA] to-[#00B894]',
+    accentColor: '#00D4AA',
     number: '06',
   },
 ];
@@ -310,7 +316,7 @@ const ServicesSection = () => {
       {/* Section header — centered top */}
       <div className="absolute top-6 sm:top-8 left-1/2 -translate-x-1/2 z-30 text-center">
         <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-white tracking-tight">
-          Our Services
+          What We Do For You
         </h2>
         <div className="w-12 h-[2px] bg-gradient-to-r from-primary to-accent mx-auto mt-2 rounded-full" />
       </div>
@@ -393,7 +399,7 @@ const ServicesSection = () => {
                   <div className="service-video-wrap order-1 lg:order-2 flex items-center justify-center">
                     <div className="w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[480px]">
                       <ServiceVideoPlayer
-                        serviceName={service.title}
+                        serviceName={service.videoKey}
                         isActive={activeIndex === index}
                         className="w-full"
                       />

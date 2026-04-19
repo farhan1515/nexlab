@@ -87,10 +87,10 @@ const Footer = () => {
 
   const footerLinks = {
     services: [
-      { name: 'App Development', href: '#services' },
-      { name: '3D Web Development', href: '#services' },
-      { name: 'WhatsApp Automation', href: '#services' },
-      { name: 'AI Voice Calling', href: '#services' },
+      { name: 'Website Design', href: '#services' },
+      { name: 'WhatsApp & Text Automation', href: '#services' },
+      { name: 'AI Receptionist', href: '#services' },
+      { name: 'Google & AI Search SEO', href: '#services' },
       { name: 'Custom AI Solutions', href: '#services' },
     ],
     company: [
@@ -151,7 +151,7 @@ const Footer = () => {
                   <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
                     <MapPin className="w-4 h-4 text-primary" />
                   </div>
-                  <span>Windsor, ON, Canada</span>
+                  <span>Available in Windsor, Nationwide</span>
                 </div>
               </div>
             </div>

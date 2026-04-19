@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 
-// Words that speak to business decision-makers — what they actually get
-const rotatingWords = ['Products', 'Brands', 'Futures'];
+// Words that speak directly to what business owners WANT
+const rotatingWords = ['Customers', 'Revenue', 'Growth'];
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -49,7 +49,7 @@ const HeroSection = () => {
         delay: 0.3,
       });
 
-      // Title line — "Build [word]"
+      // Title line — "Maximize [word]"
       tl.fromTo(
         '.hero-title-line',
         { y: 80, opacity: 0, filter: 'blur(8px)' },
@@ -125,19 +125,17 @@ const HeroSection = () => {
       <div className="hero-content relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="max-w-4xl">
 
-          {/* Main Title — "Build [word]" on ONE line, left-aligned */}
+          {/* Main Title — "Maximize [word]" */}
           <div className="hero-title-line mb-6 md:mb-8">
-            <h1 className="flex items-baseline gap-4 sm:gap-5 md:gap-6 flex-wrap sm:flex-nowrap">
-              <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8.5rem] font-display font-bold text-white leading-none tracking-tight">
-                Build
-              </span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8.5rem] font-display font-bold text-white leading-none tracking-tight flex flex-wrap items-end gap-x-4 gap-y-2">
+              <span>Drive</span>
               <div
-                className="relative overflow-hidden text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8.5rem]"
-                style={{ height: '1.15em', minWidth: '4em' }}
+                className="relative overflow-hidden"
+                style={{ height: '1.15em', minWidth: '6em' }}
               >
                 <span
                   ref={wordRef}
-                  className="font-display font-bold bg-gradient-to-r from-primary via-[#2EECC1] to-accent bg-clip-text text-transparent inline-block leading-[1.15] whitespace-nowrap"
+                  className="font-display font-bold bg-gradient-to-r from-primary via-[#2EECC1] to-accent bg-clip-text text-transparent block leading-[1.15]"
                 >
                   {rotatingWords[currentWordIndex]}
                 </span>
@@ -145,19 +143,19 @@ const HeroSection = () => {
             </h1>
           </div>
 
-          {/* Subtitle — concise, business-focused */}
-          <p className="hero-subtitle max-w-lg text-base sm:text-lg md:text-xl text-gray-300/90 leading-relaxed font-light mb-10 md:mb-14">
-            We design & engineer digital products that help ambitious brands scale — from concept to launch.
+          {/* Subtitle — speaks to business owners directly, no location pinning */}
+          <p className="hero-subtitle max-w-lg text-base sm:text-lg md:text-xl text-gray-300/90 leading-relaxed font-display font-normal mb-10 md:mb-14 tracking-wide">
+            We help local businesses get found online, turn visitors into paying customers, and automate the busywork — so you can focus on running your business.
           </p>
 
-          {/* Service tags — replaces old stats, shows what we do */}
+          {/* Service tags — what we actually do, in plain language */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             {[
-              'Web Development',
-              'Mobile Apps',
-              'UI/UX Design',
-              'AI Solutions',
-              'Brand Strategy',
+              'AI Automation',
+              'AI Receptionist',
+              'Google & AI Search SEO',
+              'Website Design',
+              'App Development',
             ].map((tag, i) => (
               <span
                 key={tag}

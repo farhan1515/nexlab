@@ -15,26 +15,26 @@ interface ProcessStep {
 const processSteps: ProcessStep[] = [
   {
     number: '01',
-    title: 'Discovery',
-    description: 'We dive deep into understanding your business, goals, and challenges to create a solid foundation for success.',
+    title: 'Free Chat',
+    description: "Tell us what's not working. We'll listen for 15 minutes — no sales pitch, no pressure. Just honest advice on what could help your business.",
     icon: Search,
   },
   {
     number: '02',
-    title: 'Strategy',
-    description: 'Our experts craft a comprehensive roadmap with clear milestones, timelines, and deliverables.',
+    title: 'Clear Plan & Price',
+    description: "We'll send you a simple proposal. Exactly what we'll do, how long it takes, and what it costs. No hidden fees, no surprises.",
     icon: Lightbulb,
   },
   {
     number: '03',
-    title: 'Development',
-    description: 'We code your solution using best-in-class tools to ensure it is fast, secure, and ready for future growth.',
+    title: 'We Build It',
+    description: "You'll see progress every week. Not interested in nerdy updates — we'll show you how it looks and works in real life.",
     icon: Code,
   },
   {
     number: '04',
-    title: 'Delivery',
-    description: 'Rigorous testing, smooth deployment, and ongoing support ensure long-term success.',
+    title: 'You Get Results',
+    description: "Launch day is just the beginning. We track performance and fine-tune until the customers start rolling in.",
     icon: Rocket,
   },
 ];

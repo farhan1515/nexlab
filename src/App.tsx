@@ -6,6 +6,7 @@ import HeroSection from './sections/HeroSection';
 import ServicesSection from './sections/ServicesSection';
 import ProcessSection from './sections/ProcessSection';
 import WhyChooseUsSection from './sections/WhyChooseUsSection';
+import FAQSection from './components/FAQSection';
 import CTASection from './sections/CTASection';
 import Footer from './components/Footer';
 import SchemaMarkup from './components/SchemaMarkup';
@@ -37,6 +38,7 @@ function App() {
         <ServicesSection />
         <ProcessSection />
         <WhyChooseUsSection />
+        <FAQSection />
         <CTASection />
       </main>
       <Footer />

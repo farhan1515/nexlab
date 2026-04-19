@@ -8,12 +8,12 @@ import { toast } from 'sonner';
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  'App Development',
-  '3D Web Development',
-  'Flyer Creation',
-  'WhatsApp Automation',
-  'AI Voice Calling Agent',
+  'Website Design',
+  'Google & AI Search SEO',
+  'WhatsApp & Text Automation',
+  'AI Receptionist',
   'Custom AI Solutions',
+  'Not sure — just need more customers'
 ];
 
 const CTASection = () => {
@@ -210,13 +210,12 @@ const CTASection = () => {
             </div>
 
             <h2 className="cta-title text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-6 leading-tight">
-              Ready to Transform Your{' '}
-              <span className="gradient-text">Business?</span>
+              Ready to Get More{' '}
+              <span className="gradient-text">Customers?</span>
             </h2>
 
             <p className="cta-subtitle text-lg text-gray-300 mb-8 leading-relaxed">
-              Let's discuss how NexLab can help you achieve your digital goals.
-              Get a free consultation and quote today.
+              Tell us what your business does. We'll tell you exactly how we can help — free, no strings attached.
             </p>
 
             {/* Contact Info */}
@@ -246,8 +245,8 @@ const CTASection = () => {
                   <span className="text-xl">📍</span>
                 </div>
                 <div>
-                  <p className="text-sm text-gray-400">Visit us at</p>
-                  <p className="text-white font-medium">Windsor, ON, CA</p>
+                  <p className="text-sm text-gray-400">Serving Businesses</p>
+                  <p className="text-white font-medium">Windsor, Nationwide</p>
                 </div>
               </div>
             </div>
