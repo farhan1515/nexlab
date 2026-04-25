@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 
 // Words that speak directly to what business owners WANT
-const rotatingWords = ['Customers', 'Revenue', 'Growth'];
+const rotatingWords = ['Customers', 'Revenue', 'Sales', 'Faster'];
 
 const HeroSection = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -128,7 +128,7 @@ const HeroSection = () => {
           {/* Main Title — "Maximize [word]" */}
           <div className="hero-title-line mb-6 md:mb-8">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[8.5rem] font-display font-bold text-white leading-none tracking-tight flex flex-wrap items-end gap-x-4 gap-y-2">
-              <span>Drive</span>
+              <span>Grow</span>
               <div
                 className="relative overflow-hidden"
                 style={{ height: '1.15em', minWidth: '6em' }}

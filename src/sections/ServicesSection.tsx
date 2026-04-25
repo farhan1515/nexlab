@@ -91,7 +91,7 @@ const services: Service[] = [
     videoKey: 'App Development',
     description:
       'From ordering apps for restaurants to booking apps for salons — we build sleek, high-performance mobile apps that keep your customers coming back. Available on iPhone and Android.',
-    tagline: 'iOS & Android · Ordering · Booking · Push Notifications',
+    tagline: 'iOS & Android · Ordering · Booking · Customer Retention',
     gradient: 'from-[#00D4AA] to-[#00B894]',
     accentColor: '#00D4AA',
     number: '06',

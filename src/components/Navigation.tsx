@@ -45,7 +45,14 @@ const Navigation = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
+
   const scrollToSection = (href: string) => {
+    if (!isHomePage) {
+      // Navigate to homepage with hash
+      window.location.href = '/' + href;
+      return;
+    }
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -64,11 +71,15 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <a
-            href="#"
+            href="/"
             className="nav-logo flex items-center gap-2 group"
             onClick={(e) => {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+              if (!isHomePage) {
+                window.location.href = '/';
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
           >
             <img src={logo} alt="NexLab" className="w-18 h-16 object-contain group-hover:drop-shadow-glow transition-all duration-300" />
