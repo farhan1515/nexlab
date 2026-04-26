@@ -11,6 +11,7 @@ import FAQSection from './components/FAQSection';
 import CTASection from './sections/CTASection';
 import Footer from './components/Footer';
 import SchemaMarkup from './components/SchemaMarkup';
+import FloatingScoreButton from './components/FloatingScoreButton';
 import './App.css';
 
 import { Toaster } from './components/ui/sonner';
@@ -44,6 +45,7 @@ function App() {
         <CTASection />
       </main>
       <Footer />
+      <FloatingScoreButton />
       <Toaster />
     </div>
   );

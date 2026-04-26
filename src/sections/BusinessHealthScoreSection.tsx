@@ -118,12 +118,12 @@ const BusinessHealthScoreSection = () => {
           {/* Left Content */}
           <div className="bhs-header">
             {/* FREE TOOL Badge */}
-            <div className="bhs-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
+            {/* <div className="bhs-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
               <span className="text-sm font-semibold text-accent tracking-wider uppercase">
                 FREE TOOL
               </span>
-            </div>
+            </div> */}
 
             {/* Title */}
             <h2 className="bhs-title text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-8 leading-tight">

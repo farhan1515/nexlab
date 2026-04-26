@@ -1,12 +1,11 @@
 import path from "path"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
-import { inspectAttr } from 'kimi-plugin-inspect-react'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   base: '/',
-  plugins: [inspectAttr(), react()],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -15,7 +14,7 @@ export default defineConfig({
 
   // Build optimizations for SEO and performance
   build: {
-    // Generate sourcemaps for debugging
+    // No sourcemaps in production
     sourcemap: false,
 
     // Minify for production (using built-in esbuild)
@@ -51,5 +50,10 @@ export default defineConfig({
     strictPort: false,
     host: true,
   },
-});
 
+  // Drop console in production builds
+  esbuild: mode === 'production' ? {
+    drop: ['debugger'],
+    pure: ['console.log', 'console.warn'],
+  } : undefined,
+}));

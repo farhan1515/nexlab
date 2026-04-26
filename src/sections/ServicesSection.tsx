@@ -66,7 +66,7 @@ const services: Service[] = [
   {
     icon: Search,
     title: 'Get Found on Google & AI Search',
-    videoKey: 'App Development',
+    videoKey: 'Google & AI Search',
     description:
       'When someone searches for what you sell — on Google, ChatGPT, Gemini, or Siri — do they find YOU or your competitor? We put your business at the top of every search, traditional and AI-powered.',
     tagline: 'Google Maps · Google Search · ChatGPT · Gemini · Siri',

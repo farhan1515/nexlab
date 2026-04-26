@@ -138,8 +138,10 @@ const CTASection = () => {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey) {
-      toast.error('Configuration Error: Missing EmailJS keys in .env file.');
-      console.error('Missing EmailJS keys. make sure VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY are set in your .env file.');
+      if (import.meta.env.DEV) {
+        console.error('Missing EmailJS keys. Make sure VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY are set in your .env file.');
+      }
+      toast.error('Something went wrong. Please try again or contact us directly.');
       setIsSubmitting(false);
       return;
     }
@@ -178,7 +180,9 @@ const CTASection = () => {
       }, 100);
 
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      if (import.meta.env.DEV) {
+        console.error('EmailJS Error:', error);
+      }
       toast.error('Failed to send message. Please try again later.');
       setIsSubmitting(false);
     }
@@ -264,11 +268,12 @@ const CTASection = () => {
                   <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
                     {/* Name */}
                     <div className="form-field">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="cta-name" className="block text-sm font-medium text-gray-300 mb-2">
                         Full Name
                       </label>
                       <input
                         type="text"
+                        id="cta-name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
@@ -282,11 +287,12 @@ const CTASection = () => {
 
                     {/* Email */}
                     <div className="form-field">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="cta-email" className="block text-sm font-medium text-gray-300 mb-2">
                         Email Address
                       </label>
                       <input
                         type="email"
+                        id="cta-email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -300,11 +306,12 @@ const CTASection = () => {
 
                     {/* Phone Number */}
                     <div className="form-field">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="cta-phone" className="block text-sm font-medium text-gray-300 mb-2">
                         WhatsApp Number
                       </label>
                       <input
                         type="tel"
+                        id="cta-phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
@@ -317,11 +324,12 @@ const CTASection = () => {
 
                     {/* Company */}
                     <div className="form-field">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="cta-company" className="block text-sm font-medium text-gray-300 mb-2">
                         Company Name
                       </label>
                       <input
                         type="text"
+                        id="cta-company"
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
@@ -334,10 +342,11 @@ const CTASection = () => {
 
                     {/* Service */}
                     <div className="form-field">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="cta-service" className="block text-sm font-medium text-gray-300 mb-2">
                         Service Interested In
                       </label>
                       <select
+                        id="cta-service"
                         name="service"
                         value={formData.service}
                         onChange={handleChange}
@@ -355,10 +364,11 @@ const CTASection = () => {
 
                     {/* Message */}
                     <div className="form-field">
-                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                      <label htmlFor="cta-message" className="block text-sm font-medium text-gray-300 mb-2">
                         Project Details
                       </label>
                       <textarea
+                        id="cta-message"
                         name="message"
                         value={formData.message}
                         onChange={handleChange}

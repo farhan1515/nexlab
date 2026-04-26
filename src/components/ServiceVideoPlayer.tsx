@@ -8,6 +8,7 @@ import {
   WhatsAppVideo,
   AIVoiceVideo,
   CustomAIVideo,
+  GoogleAISearchVideo,
 } from '../remotion';
 
 interface ServiceVideoPlayerProps {
@@ -18,13 +19,14 @@ interface ServiceVideoPlayerProps {
 
 // Map service names to video components and durations
 const videoConfig: Record<string, { component: React.ComponentType; duration: number }> = {
-  'App Development': { component: AppDevelopmentVideo, duration: 150 },
-  '3D Web Development': { component: Web3DVideo, duration: 150 },
+  'App Development': { component: AppDevelopmentVideo, duration: 200 },
+  '3D Web Development': { component: Web3DVideo, duration: 200 },
   'Flyer Creation': { component: FlyerVideo, duration: 150 },
   'Flyer & Brand Design': { component: FlyerVideo, duration: 150 },
   'WhatsApp Automation': { component: WhatsAppVideo, duration: 210 },
   'AI Voice Calling Agent': { component: AIVoiceVideo, duration: 210 },
-  'Custom AI Solutions': { component: CustomAIVideo, duration: 150 },
+  'Custom AI Solutions': { component: CustomAIVideo, duration: 200 },
+  'Google & AI Search': { component: GoogleAISearchVideo, duration: 240 },
 };
 
 export const ServiceVideoPlayer = ({
@@ -70,7 +72,9 @@ export const ServiceVideoPlayer = ({
   }, [isActive, isLoaded]);
 
   if (!VideoComponent) {
-    console.warn(`No video component found for service: ${serviceName}`);
+    if (import.meta.env.DEV) {
+      console.warn(`No video component found for service: ${serviceName}`);
+    }
     return null;
   }
 

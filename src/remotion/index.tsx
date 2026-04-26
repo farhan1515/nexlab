@@ -5,6 +5,7 @@ export { FlyerVideo } from './FlyerVideo';
 export { WhatsAppVideo } from './WhatsAppVideo';
 export { AIVoiceVideo } from './AIVoiceVideo';
 export { CustomAIVideo } from './CustomAIVideo';
+export { GoogleAISearchVideo } from './GoogleAISearchVideo';
 
 // Video configuration
 export const videoConfig = {
@@ -22,4 +23,5 @@ export const serviceVideos = {
   'WhatsApp Automation': 'WhatsAppVideo',
   'AI Voice Calling Agent': 'AIVoiceVideo',
   'Custom AI Solutions': 'CustomAIVideo',
+  'Google & AI Search': 'GoogleAISearchVideo',
 };
