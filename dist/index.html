@@ -39,7 +39,7 @@
   <link rel="apple-touch-icon" href="/favicon.png" />
 
   <!-- Theme Color -->
-  <meta name="theme-color" content="#6366f1" />
+  <meta name="theme-color" content="#051020" />
 
   <!-- Search Engine Verification -->
   <meta name="google-site-verification" content="9c3xOPrGhyeVRl73Ub9qJJXRxBRSvEu1e2YTFTqV84U" />
@@ -116,7 +116,80 @@
     ]
   }
   </script>
-  <script type="module" crossorigin src="/assets/index-DaZfEteX.js"></script>
+
+  <!-- 
+    Inline critical CSS for the loading screen.
+    This renders INSTANTLY — no external CSS fetch needed.
+  -->
+  <style>
+    /* Loading screen — matches the dark theme exactly */
+    #app-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: #051020;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #app-loader.loaded {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    #app-loader .logo-mark {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 24px;
+      animation: pulse-glow 1.8s ease-in-out infinite;
+    }
+    #app-loader .loader-bar {
+      width: 120px;
+      height: 3px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    #app-loader .loader-bar::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #00D4AA, #00B894);
+      animation: loader-slide 1.2s ease-in-out infinite;
+    }
+    @keyframes loader-slide {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(300%); }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.7; filter: drop-shadow(0 0 8px rgba(0,212,170,0.3)); }
+      50%      { opacity: 1;   filter: drop-shadow(0 0 20px rgba(0,212,170,0.6)); }
+    }
+
+    /* Hide the SEO-only content visually but keep it crawlable */
+    #seo-content {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* Prevent body flash — dark bg immediately */
+    body {
+      margin: 0;
+      background: #051020;
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/index-DY_BTC7j.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/react-vendor-Cgg2GOmP.js">
   <link rel="modulepreload" crossorigin href="/assets/ui-vendor-C60fruIt.js">
   <link rel="modulepreload" crossorigin href="/assets/gsap-vendor-DDlvirwQ.js">
@@ -124,62 +197,75 @@
 </head>
 
 <body>
-  <!--
-    Static SEO content rendered into #root so search engines and AI crawlers
-    see real text on first byte without executing JavaScript. React mounts
-    via createRoot() which replaces these children with the live app.
+  <!-- 
+    Premium loading screen — visible instantly while JS loads.
+    Matches the dark theme so there's zero visual flash.
   -->
-  <div id="root">
-    <main style="max-width:1100px;margin:0 auto;padding:48px 24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#111;background:#fff;line-height:1.55;">
-      <header>
-        <h1 style="font-size:2rem;margin:0 0 16px;">NexLab Solutions — Web, App &amp; AI Automation Agency in Windsor, Ontario</h1>
-        <p style="font-size:1.05rem;margin:0 0 8px;">
-          NexLab Solutions is a full-service digital agency based in Windsor, Ontario, Canada. We help small and mid-sized businesses across Canada and the USA grow with custom websites, mobile apps, WhatsApp automation, AI receptionists, and Google &amp; AI search SEO.
-        </p>
-        <p style="margin:0 0 24px;">
-          Email: <a href="mailto:hello@nexlab.solutions">hello@nexlab.solutions</a> &middot; Serving Windsor-Essex, Ontario, Canada and the United States.
-        </p>
-      </header>
-
-      <section>
-        <h2 style="font-size:1.4rem;margin:32px 0 12px;">Our Services</h2>
-        <ul style="padding-left:20px;margin:0;">
-          <li><strong>WhatsApp Automation</strong> — Auto-reply systems that handle inquiries, take bookings, and follow up with leads 24/7.</li>
-          <li><strong>AI Receptionist (AI Calling)</strong> — Virtual receptionists that answer calls, book appointments, and capture leads. Save roughly $3,000/month versus a full-time hire.</li>
-          <li><strong>Custom AI Solutions</strong> — Bespoke tools that automate invoicing, scheduling, inventory, and customer follow-ups.</li>
-          <li><strong>Google &amp; AI Search SEO</strong> — Rank on Google Maps, Google Search, ChatGPT, Gemini, and Siri.</li>
-          <li><strong>Website Design &amp; Development</strong> — Fast, mobile-ready, SEO-built-in websites delivered in two weeks. You own everything.</li>
-          <li><strong>Mobile App Development</strong> — High-performance iOS and Android apps for ordering, booking, and customer retention.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 style="font-size:1.4rem;margin:32px 0 12px;">Why NexLab</h2>
-        <p style="margin:0 0 12px;">
-          NexLab Solutions combines enterprise-level technical expertise with the personal attention of a local agency. We are one of the few firms in Windsor, Ontario offering both traditional digital services and cutting-edge AI solutions like WhatsApp automation and AI calling.
-        </p>
-      </section>
-
-      <section>
-        <h2 style="font-size:1.4rem;margin:32px 0 12px;">Frequently Asked Questions</h2>
-        <h3 style="font-size:1.05rem;margin:16px 0 4px;">How can AI actually get me more leads and revenue?</h3>
-        <p style="margin:0 0 12px;">AI doesn't sleep. While you're closed or busy, our AI systems instantly reply to inquiries across WhatsApp, SMS, or website chat — engaging leads within seconds instead of hours and booking them directly into your calendar.</p>
-
-        <h3 style="font-size:1.05rem;margin:16px 0 4px;">Will an AI receptionist sound robotic?</h3>
-        <p style="margin:0 0 12px;">No. Our voice agents use modern natural-language processing, handle interruptions gracefully, understand accents, and answer complex questions about your business, pricing, and services.</p>
-
-        <h3 style="font-size:1.05rem;margin:16px 0 4px;">What is Google &amp; AI Search SEO?</h3>
-        <p style="margin:0 0 12px;">It's optimizing your business so it's the top recommendation on both traditional search engines (Google) and modern AI platforms (ChatGPT, Gemini, Siri).</p>
-
-        <h3 style="font-size:1.05rem;margin:16px 0 4px;">Can you add AI to my existing website?</h3>
-        <p style="margin:0 0 12px;">Yes. Whether we build from scratch or integrate with your current setup, our AI voice agents, WhatsApp automation, and scheduling tools plug into your workflow.</p>
-      </section>
-
-      <footer style="margin-top:40px;padding-top:24px;border-top:1px solid #eee;font-size:0.95rem;color:#444;">
-        <p style="margin:0;">© NexLab Solutions — Windsor, Ontario, Canada. <a href="mailto:hello@nexlab.solutions">hello@nexlab.solutions</a></p>
-      </footer>
-    </main>
+  <div id="app-loader" aria-hidden="true">
+    <!-- Inline SVG logo mark (no external file needed) -->
+    <svg class="logo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="48" height="48" rx="12" fill="rgba(0,212,170,0.12)"/>
+      <path d="M14 34V14h4l10 14V14h4v20h-4L18 20v14h-4z" fill="#00D4AA"/>
+    </svg>
+    <div class="loader-bar"></div>
   </div>
+
+  <!-- React mount point — starts empty, React fills this -->
+  <div id="root"></div>
+
+  <!--
+    SEO-only content: visually hidden but crawlable.
+    Bots/crawlers see this text on first byte for indexing.
+    Users never see it — it's clipped to 1x1px off-screen.
+  -->
+  <div id="seo-content">
+    <h1>NexLab Solutions — Web, App &amp; AI Automation Agency in Windsor, Ontario</h1>
+    <p>NexLab Solutions is a full-service digital agency based in Windsor, Ontario, Canada. We help small and mid-sized businesses across Canada and the USA grow with custom websites, mobile apps, WhatsApp automation, AI receptionists, and Google &amp; AI search SEO.</p>
+    <p>Email: <a href="mailto:hello@nexlab.solutions">hello@nexlab.solutions</a> · Serving Windsor-Essex, Ontario, Canada and the United States.</p>
+    <h2>Our Services</h2>
+    <ul>
+      <li><strong>WhatsApp Automation</strong> — Auto-reply systems that handle inquiries, take bookings, and follow up with leads 24/7.</li>
+      <li><strong>AI Receptionist (AI Calling)</strong> — Virtual receptionists that answer calls, book appointments, and capture leads.</li>
+      <li><strong>Custom AI Solutions</strong> — Bespoke tools that automate invoicing, scheduling, inventory, and customer follow-ups.</li>
+      <li><strong>Google &amp; AI Search SEO</strong> — Rank on Google Maps, Google Search, ChatGPT, Gemini, and Siri.</li>
+      <li><strong>Website Design &amp; Development</strong> — Fast, mobile-ready, SEO-built-in websites delivered in two weeks.</li>
+      <li><strong>Mobile App Development</strong> — High-performance iOS and Android apps for ordering, booking, and customer retention.</li>
+    </ul>
+    <h2>Why NexLab</h2>
+    <p>NexLab Solutions combines enterprise-level technical expertise with the personal attention of a local agency. We are one of the few firms in Windsor, Ontario offering both traditional digital services and cutting-edge AI solutions like WhatsApp automation and AI calling.</p>
+    <h2>Frequently Asked Questions</h2>
+    <h3>How can AI actually get me more leads and revenue?</h3>
+    <p>AI doesn't sleep. While you're closed or busy, our AI systems instantly reply to inquiries across WhatsApp, SMS, or website chat — engaging leads within seconds instead of hours and booking them directly into your calendar.</p>
+    <h3>Will an AI receptionist sound robotic?</h3>
+    <p>No. Our voice agents use modern natural-language processing, handle interruptions gracefully, understand accents, and answer complex questions about your business, pricing, and services.</p>
+    <h3>What is Google &amp; AI Search SEO?</h3>
+    <p>It's optimizing your business so it's the top recommendation on both traditional search engines (Google) and modern AI platforms (ChatGPT, Gemini, Siri).</p>
+    <h3>Can you add AI to my existing website?</h3>
+    <p>Yes. Whether we build from scratch or integrate with your current setup, our AI voice agents, WhatsApp automation, and scheduling tools plug into your workflow.</p>
+    <footer>© NexLab Solutions — Windsor, Ontario, Canada. <a href="mailto:hello@nexlab.solutions">hello@nexlab.solutions</a></footer>
+  </div>
+
+
+  <!-- Dismiss loader once React has mounted -->
+  <script>
+    // Wait for the React app to paint, then fade out the loader
+    const observer = new MutationObserver(function(mutations, obs) {
+      const root = document.getElementById('root');
+      if (root && root.children.length > 0) {
+        // React has rendered — dismiss the loader with a fade
+        requestAnimationFrame(function() {
+          const loader = document.getElementById('app-loader');
+          if (loader) loader.classList.add('loaded');
+          // Remove from DOM after fade completes
+          setTimeout(function() {
+            if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+          }, 500);
+        });
+        obs.disconnect();
+      }
+    });
+    observer.observe(document.getElementById('root'), { childList: true });
+  </script>
 </body>
 
 </html>
