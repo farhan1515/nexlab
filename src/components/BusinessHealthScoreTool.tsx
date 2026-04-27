@@ -13,6 +13,9 @@ import {
   TrendingUp,
   Target,
   CheckCircle2,
+  AlertCircle,
+  Mail,
+  MessageCircle,
 } from 'lucide-react';
 
 // ── Server-side proxy for webhook (keeps webhook URL hidden) ──────
@@ -293,6 +296,7 @@ const BusinessHealthScoreTool = () => {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [leadInfo, setLeadInfo] = useState({
     name: '',
+    email: '',
     businessName: '',
     whatsapp: '',
     city: '',
@@ -304,7 +308,8 @@ const BusinessHealthScoreTool = () => {
   > | null>(null);
   const [copied, setCopied] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
-  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [formTouched, setFormTouched] = useState<Record<string, boolean>>({});
 
   const containerRef = useRef<HTMLDivElement>(null);
   const questionRef = useRef<HTMLDivElement>(null);
@@ -463,39 +468,90 @@ const BusinessHealthScoreTool = () => {
     }, 200);
   }, [screen, scores]);
 
-  // ── Client-side validation ─────────────────────────────────────
-  const validateForm = (): string[] => {
-    const errors: string[] = [];
-    const name = leadInfo.name.trim();
-    const businessName = leadInfo.businessName.trim();
-    const whatsapp = leadInfo.whatsapp.trim();
-    const city = leadInfo.city.trim();
+  // ── Per-field validation (industry standard: validate on blur) ──
+  const validateField = (field: string, value: string): string => {
+    const v = value.trim();
 
-    if (name.length < 2) errors.push('Please enter your full name.');
-    if (businessName.length < 2) errors.push('Please enter your business name.');
+    switch (field) {
+      case 'name': {
+        if (v.length === 0) return 'Full name is required.';
+        if (v.length < 2) return 'Name must be at least 2 characters.';
+        if (v.length > 80) return 'Name is too long.';
+        if (!/^[a-zA-Z\s'.\-]+$/.test(v)) return 'Name can only contain letters, spaces, and hyphens.';
+        if (v.split(/\s+/).length < 2) return 'Please enter your first and last name.';
+        return '';
+      }
+      case 'email': {
+        if (v.length === 0) return 'Email address is required.';
+        // RFC 5322 simplified — covers 99.9% of real-world emails
+        if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(v))
+          return 'Please enter a valid email address.';
+        // Block throwaway/temp email domains
+        const throwaway = ['mailinator.com', 'guerrillamail.com', 'tempmail.com', 'throwaway.email', 'yopmail.com', '10minutemail.com'];
+        const domain = v.split('@')[1]?.toLowerCase();
+        if (throwaway.includes(domain)) return 'Please use a business or personal email.';
+        return '';
+      }
+      case 'businessName': {
+        if (v.length === 0) return 'Business name is required.';
+        if (v.length < 2) return 'Business name must be at least 2 characters.';
+        if (v.length > 120) return 'Business name is too long.';
+        return '';
+      }
+      case 'whatsapp': {
+        if (v.length === 0) return 'WhatsApp number is required.';
+        // Extract only the digits
+        const digitsOnly = v.replace(/[^0-9]/g, '');
 
-    // Validate WhatsApp: allow +, digits, spaces, dashes, parens — min 7 digits
-    const cleanedPhone = whatsapp.replace(/[\s\-()]/g, '');
-    if (!/^\+?\d{7,15}$/.test(cleanedPhone)) {
-      errors.push('Please enter a valid WhatsApp number (e.g. +1 519 791 2209).');
+        if (digitsOnly.length < 10) return 'Number is too short. Please enter your full 10-digit number.';
+        if (digitsOnly.length > 10) return 'Number is too long. Please check your number.';
+        return '';
+      }
+      case 'city': {
+        if (v.length === 0) return 'City is required.';
+        if (v.length < 2) return 'City must be at least 2 characters.';
+        if (v.length > 80) return 'City name is too long.';
+        if (!/^[a-zA-Z\s'.\-]+$/.test(v)) return 'City can only contain letters and spaces.';
+        return '';
+      }
+      default:
+        return '';
+    }
+  };
+
+  // Run validation on a single field (called on blur)
+  const handleFieldBlur = (field: string) => {
+    setFocusedField(null);
+    setFormTouched((prev) => ({ ...prev, [field]: true }));
+    const error = validateField(field, (leadInfo as Record<string, string>)[field] || '');
+    setFieldErrors((prev) => ({ ...prev, [field]: error }));
+  };
+
+  // Validate all fields at once (called on submit)
+  const validateAllFields = (): boolean => {
+    const fields = ['name', 'email', 'businessName', 'whatsapp', 'city'];
+    const errors: Record<string, string> = {};
+    const touched: Record<string, boolean> = {};
+    let valid = true;
+
+    for (const field of fields) {
+      touched[field] = true;
+      const error = validateField(field, (leadInfo as Record<string, string>)[field] || '');
+      errors[field] = error;
+      if (error) valid = false;
     }
 
-    if (city.length < 2) errors.push('Please enter your city.');
-
-    return errors;
+    setFieldErrors(errors);
+    setFormTouched(touched);
+    return valid;
   };
 
   // ── Submit lead form ──────────────────────────────────────────
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Client-side validation
-    const errors = validateForm();
-    if (errors.length > 0) {
-      setFormErrors(errors);
-      return;
-    }
-    setFormErrors([]);
+    // Validate all fields
+    if (!validateAllFields()) return;
 
     // Transition to loading immediately
     setScreen('loading');
@@ -504,6 +560,7 @@ const BusinessHealthScoreTool = () => {
 
     const payload = {
       name: leadInfo.name.trim(),
+      email: leadInfo.email.trim().toLowerCase(),
       businessName: leadInfo.businessName.trim(),
       whatsapp: leadInfo.whatsapp.trim(),
       city: leadInfo.city.trim(),
@@ -637,7 +694,7 @@ const BusinessHealthScoreTool = () => {
 
             <p className="text-lg text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
               Get your free NexLab Business Health Score in 2 minutes.
-              No fluff. Just an honest report sent to your WhatsApp.
+              No fluff. Just an honest report with your top priority fixes.
             </p>
 
             <button
@@ -739,24 +796,13 @@ const BusinessHealthScoreTool = () => {
               <h3 className="text-2xl sm:text-3xl font-display font-bold text-white mb-3">
                 Your report is ready.
               </h3>
-              <p className="text-gray-400 max-w-sm mx-auto">
-                Enter your details and we'll send your personalized
-                report to your WhatsApp in under 2 minutes.
+              <p className="text-gray-400 max-w-md mx-auto">
+                Enter your details below. We'll <span className="text-white font-medium">email your full scorecard</span> and
+                <span className="text-white font-medium"> text you your top 3 priority fixes</span> within 2 minutes.
               </p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
-              {/* Validation errors */}
-              {formErrors.length > 0 && (
-                <div className="rounded-xl bg-red-500/10 border border-red-500/20 p-4" role="alert">
-                  <ul className="space-y-1">
-                    {formErrors.map((err, i) => (
-                      <li key={i} className="text-sm text-red-400">{err}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
               {/* Honeypot — hidden from real users, catches bots */}
               <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', height: 0, overflow: 'hidden' }}>
                 <label htmlFor="score-website">Website</label>
@@ -776,6 +822,7 @@ const BusinessHealthScoreTool = () => {
                 />
               </div>
 
+              {/* ── Full Name ── */}
               <div>
                 <label htmlFor="score-name" className="block text-sm font-medium text-gray-300 mb-2">
                   Full Name
@@ -786,19 +833,66 @@ const BusinessHealthScoreTool = () => {
                   required
                   autoComplete="name"
                   value={leadInfo.name}
-                  onChange={(e) =>
-                    setLeadInfo((p) => ({
-                      ...p,
-                      name: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => {
+                    setLeadInfo((p) => ({ ...p, name: e.target.value }));
+                    if (formTouched.name) {
+                      setFieldErrors((prev) => ({ ...prev, name: validateField('name', e.target.value) }));
+                    }
+                  }}
                   onFocus={() => setFocusedField('name')}
-                  onBlur={() => setFocusedField(null)}
-                  className={`form-input ${focusedField === 'name' ? 'border-primary shadow-glow' : ''}`}
+                  onBlur={() => handleFieldBlur('name')}
+                  className={`form-input ${focusedField === 'name' ? 'border-primary shadow-glow' :
+                    formTouched.name && fieldErrors.name ? 'border-red-500/50' :
+                      formTouched.name && !fieldErrors.name ? 'border-green-500/30' : ''
+                    }`}
                   placeholder="John Doe"
                 />
+                {formTouched.name && fieldErrors.name && (
+                  <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                    {fieldErrors.name}
+                  </p>
+                )}
               </div>
 
+              {/* ── Email Address ── */}
+              <div>
+                <label htmlFor="score-email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <span className="flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5 text-primary" />
+                    Email Address
+                    <span className="text-xs text-gray-500 font-normal">— for your full report</span>
+                  </span>
+                </label>
+                <input
+                  type="email"
+                  id="score-email"
+                  required
+                  autoComplete="email"
+                  value={leadInfo.email}
+                  onChange={(e) => {
+                    setLeadInfo((p) => ({ ...p, email: e.target.value }));
+                    if (formTouched.email) {
+                      setFieldErrors((prev) => ({ ...prev, email: validateField('email', e.target.value) }));
+                    }
+                  }}
+                  onFocus={() => setFocusedField('email')}
+                  onBlur={() => handleFieldBlur('email')}
+                  className={`form-input ${focusedField === 'email' ? 'border-primary shadow-glow' :
+                    formTouched.email && fieldErrors.email ? 'border-red-500/50' :
+                      formTouched.email && !fieldErrors.email ? 'border-green-500/30' : ''
+                    }`}
+                  placeholder="john@yourbusiness.com"
+                />
+                {formTouched.email && fieldErrors.email && (
+                  <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                    {fieldErrors.email}
+                  </p>
+                )}
+              </div>
+
+              {/* ── Business Name ── */}
               <div>
                 <label htmlFor="score-business" className="block text-sm font-medium text-gray-300 mb-2">
                   Business Name
@@ -809,22 +903,36 @@ const BusinessHealthScoreTool = () => {
                   required
                   autoComplete="organization"
                   value={leadInfo.businessName}
-                  onChange={(e) =>
-                    setLeadInfo((p) => ({
-                      ...p,
-                      businessName: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => {
+                    setLeadInfo((p) => ({ ...p, businessName: e.target.value }));
+                    if (formTouched.businessName) {
+                      setFieldErrors((prev) => ({ ...prev, businessName: validateField('businessName', e.target.value) }));
+                    }
+                  }}
                   onFocus={() => setFocusedField('business')}
-                  onBlur={() => setFocusedField(null)}
-                  className={`form-input ${focusedField === 'business' ? 'border-primary shadow-glow' : ''}`}
+                  onBlur={() => handleFieldBlur('businessName')}
+                  className={`form-input ${focusedField === 'business' ? 'border-primary shadow-glow' :
+                    formTouched.businessName && fieldErrors.businessName ? 'border-red-500/50' :
+                      formTouched.businessName && !fieldErrors.businessName ? 'border-green-500/30' : ''
+                    }`}
                   placeholder="Your Business"
                 />
+                {formTouched.businessName && fieldErrors.businessName && (
+                  <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                    {fieldErrors.businessName}
+                  </p>
+                )}
               </div>
 
+              {/* ── WhatsApp Number ── */}
               <div>
                 <label htmlFor="score-whatsapp" className="block text-sm font-medium text-gray-300 mb-2">
-                  WhatsApp Number
+                  <span className="flex items-center gap-1.5">
+                    <MessageCircle className="w-3.5 h-3.5 text-green-400" />
+                    WhatsApp Number
+                    <span className="text-xs text-gray-500 font-normal">— for your quick action steps</span>
+                  </span>
                 </label>
                 <input
                   type="tel"
@@ -832,19 +940,44 @@ const BusinessHealthScoreTool = () => {
                   required
                   autoComplete="tel"
                   value={leadInfo.whatsapp}
-                  onChange={(e) =>
-                    setLeadInfo((p) => ({
-                      ...p,
-                      whatsapp: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => {
+                    // Auto-format North American phone numbers
+                    let digits = e.target.value.replace(/\D/g, '');
+                    // Automatically strip the leading "1" (country code) if they type it
+                    if (digits.startsWith('1')) digits = digits.substring(1);
+                    // Strictly cap at exactly 10 digits
+                    digits = digits.substring(0, 10);
+
+                    let formatted = '';
+                    if (digits.length > 0) {
+                      if (digits.length <= 3) formatted = `(${digits}`;
+                      else if (digits.length <= 6) formatted = `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+                      else formatted = `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+                    }
+
+                    setLeadInfo((p) => ({ ...p, whatsapp: formatted }));
+                    if (formTouched.whatsapp) {
+                      setFieldErrors((prev) => ({ ...prev, whatsapp: validateField('whatsapp', formatted) }));
+                    }
+                  }}
                   onFocus={() => setFocusedField('whatsapp')}
-                  onBlur={() => setFocusedField(null)}
-                  className={`form-input ${focusedField === 'whatsapp' ? 'border-primary shadow-glow' : ''}`}
-                  placeholder="+1 519..."
+                  onBlur={() => handleFieldBlur('whatsapp')}
+                  className={`form-input ${focusedField === 'whatsapp' ? 'border-primary shadow-glow' :
+                    formTouched.whatsapp && fieldErrors.whatsapp ? 'border-red-500/50' :
+                      formTouched.whatsapp && !fieldErrors.whatsapp ? 'border-green-500/30' : ''
+                    }`}
+                  placeholder="(519) 519-5199"
+                  maxLength={14}
                 />
+                {formTouched.whatsapp && fieldErrors.whatsapp && (
+                  <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                    {fieldErrors.whatsapp}
+                  </p>
+                )}
               </div>
 
+              {/* ── City ── */}
               <div>
                 <label htmlFor="score-city" className="block text-sm font-medium text-gray-300 mb-2">
                   City
@@ -855,17 +988,26 @@ const BusinessHealthScoreTool = () => {
                   required
                   autoComplete="address-level2"
                   value={leadInfo.city}
-                  onChange={(e) =>
-                    setLeadInfo((p) => ({
-                      ...p,
-                      city: e.target.value,
-                    }))
-                  }
+                  onChange={(e) => {
+                    setLeadInfo((p) => ({ ...p, city: e.target.value }));
+                    if (formTouched.city) {
+                      setFieldErrors((prev) => ({ ...prev, city: validateField('city', e.target.value) }));
+                    }
+                  }}
                   onFocus={() => setFocusedField('city')}
-                  onBlur={() => setFocusedField(null)}
-                  className={`form-input ${focusedField === 'city' ? 'border-primary shadow-glow' : ''}`}
+                  onBlur={() => handleFieldBlur('city')}
+                  className={`form-input ${focusedField === 'city' ? 'border-primary shadow-glow' :
+                    formTouched.city && fieldErrors.city ? 'border-red-500/50' :
+                      formTouched.city && !fieldErrors.city ? 'border-green-500/30' : ''
+                    }`}
                   placeholder="Windsor"
                 />
+                {formTouched.city && fieldErrors.city && (
+                  <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3 flex-shrink-0" />
+                    {fieldErrors.city}
+                  </p>
+                )}
               </div>
 
               <button
@@ -874,13 +1016,13 @@ const BusinessHealthScoreTool = () => {
                 className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-semibold rounded-xl hover:scale-105 hover:shadow-glow transition-all duration-300 group"
               >
                 <Send className="w-5 h-5" />
-                Send My Free Report
+                Get My Free Report
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </form>
 
             <p className="text-center text-xs text-gray-500 mt-4">
-              🔒 Your information is only used to send your report. We never sell or share your data.
+              🔒 Your information is only used to deliver your report. We never sell or share your data.
             </p>
           </div>
         </div>

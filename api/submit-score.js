@@ -57,6 +57,18 @@ function isValidCity(city) {
   return typeof city === 'string' && city.trim().length >= 2 && city.trim().length <= 100;
 }
 
+// ── Validate email ──
+function isValidEmail(email) {
+  if (typeof email !== 'string') return false;
+  const trimmed = email.trim();
+  // RFC 5322 simplified
+  if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(trimmed)) return false;
+  // Block throwaway domains
+  const throwaway = ['mailinator.com', 'guerrillamail.com', 'tempmail.com', 'throwaway.email', 'yopmail.com', '10minutemail.com'];
+  const domain = trimmed.split('@')[1]?.toLowerCase();
+  return !throwaway.includes(domain);
+}
+
 export default async function handler(req, res) {
   // ── CORS: only allow our own domain ──
   const allowedOrigins = [
@@ -113,6 +125,9 @@ export default async function handler(req, res) {
     if (!isValidName(body.name)) {
       errors.push('Name must be between 2 and 100 characters.');
     }
+    if (!body.email || !isValidEmail(body.email)) {
+      errors.push('Please enter a valid email address.');
+    }
     if (!isValidName(body.businessName)) {
       errors.push('Business name must be between 2 and 100 characters.');
     }
@@ -130,6 +145,7 @@ export default async function handler(req, res) {
     // ── Sanitize all string fields ──
     const sanitizedPayload = {
       name: sanitize(body.name),
+      email: sanitize(body.email).toLowerCase(),
       businessName: sanitize(body.businessName),
       whatsapp: sanitize(body.whatsapp),
       city: sanitize(body.city),
