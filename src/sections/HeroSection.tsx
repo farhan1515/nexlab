@@ -111,7 +111,6 @@ const HeroSection = () => {
           loop
           playsInline
           className="w-full h-full object-cover"
-          poster="/hero-bg.jpg"
           aria-label="NexLab offices background video"
         >
           <source src="/hero-video.mp4" type="video/mp4" />
